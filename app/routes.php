@@ -1,5 +1,9 @@
 <?php
+
 use Symfony\Component\HttpFoundation\Request;
+use WebLinks\Domain\Link;
+use WebLinks\Form\Type\LinkType;
+
 
 // Home page
 $app->get('/', function () use ($app) {
@@ -14,3 +18,27 @@ $app->get('/login', function(Request $request) use ($app) {
         'last_username' => $app['session']->get('_security.last_username'),
     ));
 })->bind('login');
+
+// Add link
+$app->match('/link/{id}', function ($id, Request $request) use ($app) {
+    //$article = $app['dao.article']->find($id);
+    $linkFormView = null;
+    if ($app['security.authorization_checker']->isGranted('IS_AUTHENTICATED_FULLY')) {
+        // A user is fully authenticated : he can add comments
+        $link = new link();
+        //$link->setArticle($article);
+        $user = $app['user'];
+        $link->setAuthor($user);
+        $linkForm = $app['form.factory']->create(new LinkType(), $link);
+        $linkForm->handleRequest($request);
+        if ($linkForm->isSubmitted() && $linkForm->isValid()) {
+            $app['dao.link']->save($link);
+            $app['session']->getFlashBag()->add('success', 'Your comment was succesfully added.');
+        }
+        $linkFormView = $linkForm->createView();
+    }
+    $links = $app['dao.link']->findAll();
+    return $app['twig']->render('link.html.twig', array(
+        'links' => $links,
+        'linkForm' => $linkFormView));
+})->bind('link');

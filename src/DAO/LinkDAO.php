@@ -38,4 +38,24 @@ class LinkDAO extends DAO
         
         return $link;
     }
+	
+	/**
+     * Saves a link into the database.
+     *
+     * @param \WebLinks\Domain\Link $link The link to save
+     */
+    public function save(Link $link){
+        $linkData = array(
+            'link_id' => $link->getId(),            
+			'link_title' => $link->getTitle(), 
+            'link_url' => $link->getUrl(), 
+			'user_id' => $link->getAuthor()->getId
+            );
+
+            // The link saved : insert it
+            $this->getDb()->insert('t_link', $linkData);
+            // Get the id of the newly created link and set it on the entity.
+            $id = $this->getDb()->lastInsertId();
+            $link->setId($id);
+    }
 }
