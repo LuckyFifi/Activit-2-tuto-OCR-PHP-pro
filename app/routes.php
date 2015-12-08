@@ -20,13 +20,12 @@ $app->get('/login', function(Request $request) use ($app) {
 })->bind('login');
 
 // Add link
-$app->match('/link/{id}', function ($id, Request $request) use ($app) {
-    //$article = $app['dao.article']->find($id);
+
+$app->match('/link', function (Request $request) use ($app){
     $linkFormView = null;
-    if ($app['security.authorization_checker']->isGranted('IS_AUTHENTICATED_FULLY')) {
+    if ($app['security.authorization_checker']->isGranted('IS_AUTHENTICATED_FULLY')){
         // A user is fully authenticated : he can add comments
         $link = new link();
-        //$link->setArticle($article);
         $user = $app['user'];
         $link->setAuthor($user);
         $linkForm = $app['form.factory']->create(new LinkType(), $link);
@@ -37,8 +36,7 @@ $app->match('/link/{id}', function ($id, Request $request) use ($app) {
         }
         $linkFormView = $linkForm->createView();
     }
-    $links = $app['dao.link']->findAll();
     return $app['twig']->render('link.html.twig', array(
-        'links' => $links,
+        //'links' => $links,
         'linkForm' => $linkFormView));
 })->bind('link');

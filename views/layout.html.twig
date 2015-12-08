@@ -20,6 +20,16 @@
                     </button>
                     <a class="navbar-brand" href="{{ path('home') }}">WebLinks</a>
                 </div>
+				{% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
+				<div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-target">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ path('link') }}">Submit Link</a>
+                </div>
+				 {% endif %}
                 <div class="collapse navbar-collapse" id="navbar-collapse-target">
                     <ul class="nav navbar-nav navbar-right">
                         {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}

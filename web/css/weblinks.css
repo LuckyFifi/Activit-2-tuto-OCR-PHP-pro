@@ -1,4 +1,6 @@
 body { 
     padding-top: 70px; 
 }
-
+.form_container{
+	text-align: center;
+}
