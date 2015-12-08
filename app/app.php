@@ -33,6 +33,7 @@ $app->register(new Silex\Provider\TranslationServiceProvider());
 // Register services
 $app['dao.link'] = $app->share(function ($app) {
     $linkDAO = new WebLinks\DAO\LinkDAO($app['db']);
+	$linkDAO->setUserDAO($app['dao.user']);
     return $linkDAO;
 });
 $app['dao.user'] = $app->share(function ($app) {
