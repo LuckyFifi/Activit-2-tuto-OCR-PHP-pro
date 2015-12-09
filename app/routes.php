@@ -46,6 +46,6 @@ $app->get('/admin', function() use ($app) {
     $links = $app['dao.link']->findAll();
     $users = $app['dao.user']->findAll();
     return $app['twig']->render('admin.html.twig', array(
-        'links' => $linkss,
+        'links' => $links,
         'users' => $users));
 })->bind('admin');

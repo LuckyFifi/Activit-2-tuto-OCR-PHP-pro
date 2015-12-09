@@ -4,3 +4,7 @@ body {
 .form_container{
 	text-align: center;
 }
+.adminTable{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
