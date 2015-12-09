@@ -40,3 +40,12 @@ $app->match('/link', function (Request $request) use ($app){
         //'links' => $links,
         'linkForm' => $linkFormView));
 })->bind('link');
+
+// Admin home page
+$app->get('/admin', function() use ($app) {
+    $links = $app['dao.link']->findAll();
+    $users = $app['dao.user']->findAll();
+    return $app['twig']->render('admin.html.twig', array(
+        'links' => $comments,
+        'users' => $users));
+})->bind('admin');
