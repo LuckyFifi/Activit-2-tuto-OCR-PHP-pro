@@ -22,7 +22,7 @@ $app->get('/login', function(Request $request) use ($app) {
 
 // Add a new link
 $app->match('/link', function (Request $request) use ($app){
-    $linkFormView = null;
+    //$linkFormView = null;
     if ($app['security.authorization_checker']->isGranted('IS_AUTHENTICATED_FULLY')){
         // A user is fully authenticated : he can add comments
         $link = new link();
