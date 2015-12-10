@@ -20,7 +20,7 @@
 </div>
 <div class="tab-content">
     <div class="tab-pane fade in active adminTable" id="links">
-        {% if articles %}
+        {% if links %}
         <div class="table-responsive">
             <table class="table table-hover table-condensed">
                 <thead>
@@ -40,7 +40,7 @@
                         <button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#linkDialog{{ link.id }}">
 						<span class="glyphicon glyphicon-remove"></span>
                         </button>
-                        <div class="modal fade" id="linkDialog{{ article.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="linkDialog{{ link.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -65,7 +65,6 @@
         {% else %}
         <div class="alert alert-warning">No links found.</div>
         {% endif %}
-        <a href="{{ path('admin_link_add') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add link</button></a>
     </div>
     </div>
     <div class="tab-pane fade adminTable" id="users">

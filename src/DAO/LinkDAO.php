@@ -14,6 +14,24 @@ class LinkDAO extends DAO
 	public function setUserDAO(UserDAO $userDAO) {
         $this->userDAO = $userDAO;
     }
+	
+	/**
+     * Returns a link matching the supplied id.
+     *
+     * @param integer $id The link id
+     *
+     * @return \WebLinks\Domain\Link|throws an exception if no matching link is found
+     */
+    public function find($id) {
+        $sql = "SELECT * FROM t_link WHERE link_id=?";
+        $row = $this->getDb()->fetchAssoc($sql, array($id));
+
+        if ($row)
+            return $this->buildDomainObject($row);
+        else
+            throw new \Exception("No link matching id " . $id);
+    }
+
 
     /**
      * Returns a list of all links, sorted by id.
@@ -77,4 +95,14 @@ class LinkDAO extends DAO
             $link->setId($id);
         }
 	}
+	/**
+     * Removes an article from the database.
+     *
+     * @param integer $id The article id.
+     */
+    public function delete($id){
+        // Delete the link
+        $this->getDb()->delete('t_link', array('link_id' => $id));
+    }
+
 }
