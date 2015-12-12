@@ -37,7 +37,6 @@ $app->match('/link', function (Request $request) use ($app){
         $linkFormView = $linkForm->createView();
     }
     return $app['twig']->render('link.html.twig', array(
-        //'links' => $links,
         'linkForm' => $linkFormView));
 })->bind('link');
 
