@@ -96,9 +96,9 @@ class LinkDAO extends DAO
         }
 	}
 	/**
-     * Removes an article from the database.
+     * Removes an link from the database.
      *
-     * @param integer $id The article id.
+     * @param integer $id The link id.
      */
     public function delete($id){
         // Delete the link
