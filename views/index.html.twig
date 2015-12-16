@@ -4,14 +4,15 @@
 
 {% block content %}
     {% if links %}
-        <div class="list-group">
+        <div class="row">
             {% for link in links %}
-                <a href="{{ link.url }}" class="list-group-item">{{ link.title }}
-                <span class="small">Submitted by </span>{{ link.author.username}}
-                </a>
+			<div style="border: 1px solid blue; height: 100px;" class="col-lg-2 ">
+                <a href="{{ link.url }}" >{{ link.title }}</a>
+                <p><span class="small">Submitted by </span>{{ link.author.username}}</p>
+            </div>   
             {% endfor %}
         </div>
-        {% else %}
+    {% else %}
         <div class="alert alert-warning">
             No links found.
         </div>
